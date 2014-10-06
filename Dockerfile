@@ -39,6 +39,7 @@ RUN npm install hubot-calculator --save
 RUN npm install hubot-jenkins-notifier --save
 
 RUN npm install
+
 RUN chmod 755 bin/hubot
 RUN chmod +x /<EXECUTION SCRIPT>/bot.sh
 CMD ["/<EXECUTION SCRIPT>/bot.sh"]
