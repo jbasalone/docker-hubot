@@ -14,9 +14,9 @@
 child_process = require 'child_process'
 new_updates = false
 
-module.exports = (robot) ->
+module.exports = (bender) ->
 
-    robot.respond /changelog/i, (msg) ->
+    bender.respond /changelog/i, (msg) ->
         child_process.exec 'git --no-pager log --pretty=format:"%h - %an, %ar : %s" | head', (error, stdout, stderr) ->
           if error
             msg.send "I can't show you my changelog.  I'm so embarassed right now, I wish everyone was dead. Here's why : " + stderr
