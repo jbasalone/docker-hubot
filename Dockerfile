@@ -1,4 +1,4 @@
-FROM images.quadra.opendns.com/opendns/trusty
+FROM trusty
 ENV DEBIAN_FRONTEND noninteractive
 ## install required packages
 ## 092614
