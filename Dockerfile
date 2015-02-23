@@ -1,4 +1,4 @@
-FROM images
+FROM images.quadra.opendns.com/opendns/trusty
 ENV DEBIAN_FRONTEND noninteractive
 ## install required packages
 ## 092614
@@ -14,32 +14,35 @@ RUN apt-get install -yf \
     nodejs\
     npm 
 
-WORKDIR /root
+WORKDIR /root 
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm install -g hubot coffee-script
+RUN npm install -g hubot coffee-script yo generator-hubot
 
-RUN git config --global user.name "BenderBot"
-RUN git config --global user.email ""
+COPY hubot-scripts.json /root/hubot-scripts.json
+COPY external-scripts.json /root/external-scripts.json
+COPY package.json /root/package.json
 
-RUN apt-get install ca-certificates
+#WORKDIR /root/bender
 
-RUN git clone https://github /root/bender
-WORKDIR /root/bender 
+RUN npm install -g hubot-hipchat  
+RUN npm install -g hubot-pagerduty-github 
+RUN npm install -g hubot-shipit 
+RUN npm install -g hubot-pugme 
+RUN npm install -g hubot-victory 
+RUN npm install -g hubot-jenkins 
+RUN npm install -g hubot-thesimpsons 
+RUN npm install -g hubot-calculator 
+RUN npm install -g hubot-jenkins-notifier 
+RUN npm install -g htmlparser 
+RUN npm install -g hubot-trello
 
-RUN npm install hubot-hipchat --save 
-RUN npm install hubot-pagerduty-github --save
-RUN npm install hubot-shipit --save
-RUN npm install hubot-pugme --save
-RUN npm install hubot-victory --save
-RUN npm install hubot-jenkins --save
-RUN npm install hubot-thesimpsons --save
-RUN npm install hubot-calculator --save
-RUN npm install hubot-jenkins-notifier --save
-RUN npm install htmlparser --save
-
+COPY bender.sh /root/bender.sh
+COPY build.sh /root/build.sh
 
 RUN npm install 
-RUN chmod 755 bin/hubot
-RUN chmod +x /root/bender/bender.sh
-CMD ["/root/bender/bender.sh"]
+#RUN yo hubot --owner "eng.systems-team@opendns.com" --name "Bender" --adapter hipchat --home "/root" 
+RUN chmod +x /root/bender.sh
+CMD ["/root/bender.sh"]
+ADD bin /root/bin
+ADD scripts /root/scripts   
