@@ -17,5 +17,5 @@ meat = [
 ]
 
 module.exports = (bender) ->
-   bender.hear /meat|meatme|carnage|ruthless/\b/i, (msg) ->
+   bender.hear /meat|meatme|carnage|ruthless/i, (msg) ->
      msg.send msg.random meat 
