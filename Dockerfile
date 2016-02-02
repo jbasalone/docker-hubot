@@ -41,7 +41,7 @@ COPY bender.sh /root/bender.sh
 COPY build.sh /root/build.sh
 
 RUN npm install 
-#RUN yo hubot --owner "eng.systems-team@opendns.com" --name "Bender" --adapter hipchat --home "/root" 
+#RUN yo hubot --owner "emailaddress" --name "Bender" --adapter hipchat --home "/root" 
 RUN chmod +x /root/bender.sh
 CMD ["/root/bender.sh"]
 ADD bin /root/bin
